@@ -66,6 +66,9 @@ data/
 ├── K-Nearest Neighbors (KNN).txt
 ├── Árvores de Decisão.txt
 ├── Inteligência Artificial.txt
+├── Embeddings.txt
+├── Redes Neurais.txt
+├── Regressão Linear.txt
 
 Trabalho_IA_Jarvis.ipynb
 README.md
@@ -113,6 +116,9 @@ data/
 ├── K-Nearest Neighbors (KNN).txt
 ├── Árvores de Decisão.txt
 ├── Inteligência Artificial.txt
+├── Embeddings.txt
+├── Redes Neurais.txt
+├── Regressão Linear.txt
 ```
 
 4. Inserir o token da API da Gemma na célula de configuração da API.
