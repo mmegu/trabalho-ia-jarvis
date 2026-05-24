@@ -19,10 +19,10 @@ Exemplos:
 
 Para isso, o sistema utiliza:
 
-- embeddings;
-- busca vetorial com FAISS;
-- recuperação semântica de trechos;
-- geração de respostas utilizando a Gemma 12B.
+- embeddings
+- busca vetorial com FAISS
+- recuperação semântica de trechos
+- geração de respostas utilizando a Gemma 12B
 
 ---
 
@@ -41,9 +41,9 @@ Exemplos:
 
 O sistema permite:
 
-- adicionar tarefas;
-- listar tarefas;
-- concluir tarefas.
+- adicionar tarefas
+- listar tarefas
+- concluir tarefas
 
 ---
 
@@ -70,6 +70,25 @@ data/
 Trabalho_IA_Jarvis.ipynb
 README.md
 ```
+
+---
+
+## Funcionamento do RAG
+
+Breve explicação de como está ocorrendo o funcionamento nesta primeira entrega.
+O sistema utiliza a técnica RAG para responder perguntas sobre os materiais acadêmicos cadastrados.
+
+Fluxo utilizado:
+
+1. Os arquivos `.txt` são carregados da pasta `data`
+2. Os textos são divididos em pequenos trechos (chunks)
+3. Os chunks são convertidos em embeddings vetoriais
+4. Os embeddings são armazenados no índice vetorial FAISS
+5. A pergunta do usuário também é convertida em embedding
+6. O sistema recupera os trechos semanticamente mais próximos
+7. Os trechos recuperados são enviados para a Gemma 12B gerar a resposta final
+
+Permitindo realizar consultas semânticas utilizando os conteúdos cadastrados localmente.
 
 ---
 
