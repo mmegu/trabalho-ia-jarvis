@@ -55,6 +55,7 @@ O sistema permite:
 - OpenAI SDK
 - Gemma 12B
 - Google Colab
+- ChatGPT
 
 ---
 
