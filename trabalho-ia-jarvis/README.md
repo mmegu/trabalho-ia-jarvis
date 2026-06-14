@@ -202,18 +202,9 @@ data/
 ├── Árvores de Decisão.txt
 └── K-Nearest Neighbors (KNN).txt
 
-avaliacao/
-├── avaliacao_sistema.json
-└── analise_erros.json
-
-agenda.json
-tarefas.json
-logs.json
-
 Trabalho_IA_Jarvis.ipynb
 README.md
 ```
-
 ---
 
 ## Como executar
