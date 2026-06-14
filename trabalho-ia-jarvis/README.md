@@ -2,7 +2,7 @@
 
 Projeto desenvolvido para a disciplina de Inteligência Artificial.
 
-O sistema funciona como um assistente acadêmico simples, permitindo consulta a materiais de estudo, gerenciamento de agenda e controle de tarefas.
+O sistema funciona como um assistente acadêmico capaz de auxiliar estudantes por meio de consulta a materiais de estudo, gerenciamento de agenda, controle de tarefas e planejamento de estudos utilizando técnicas de Inteligência Artificial.
 
 ---
 
@@ -14,15 +14,16 @@ O sistema permite realizar perguntas sobre materiais acadêmicos cadastrados em 
 
 Exemplos:
 
-- "Explique o que é KNN"
-- "O que são árvores de decisão?"
+* "Explique o que é KNN"
+* "O que são embeddings?"
+* "Resuma o conteúdo sobre Deep Learning"
 
 Para isso, o sistema utiliza:
 
-- embeddings
-- busca vetorial com FAISS
-- recuperação semântica de trechos
-- geração de respostas utilizando a Gemma 12B
+* embeddings;
+* busca vetorial com FAISS;
+* recuperação semântica de trechos;
+* geração de respostas utilizando uma LLM.
 
 ---
 
@@ -32,8 +33,9 @@ Permite consultar compromissos acadêmicos cadastrados localmente.
 
 Exemplos:
 
-- "Tenho prova amanhã?"
-- "O que tenho hoje?"
+* "Tenho prova amanhã?"
+* "O que tenho hoje?"
+* "Quais são minhas aulas esta semana?"
 
 ---
 
@@ -41,21 +43,147 @@ Exemplos:
 
 O sistema permite:
 
-- adicionar tarefas
-- listar tarefas
-- concluir tarefas
+* adicionar tarefas;
+* listar tarefas;
+* concluir tarefas.
+
+---
+
+### Planejamento de estudos
+
+O sistema combina:
+
+* agenda;
+* tarefas;
+* materiais recuperados pelo RAG.
+
+Exemplos:
+
+* "Monte um plano de estudos para a prova"
+* "O que devo priorizar hoje?"
+
+---
+
+### Tool Calling
+
+O sistema possui múltiplas ferramentas integradas.
+
+A escolha da ferramenta é realizada automaticamente pela LLM de acordo com a solicitação do usuário.
+
+Ferramentas implementadas:
+
+* consultar_agenda
+* listar_tarefas
+* adicionar_tarefa
+* concluir_tarefa
+* buscar_material_rag
+* planejar_estudos
+* gerar_exercicios
+* recomendar_revisao
+* active_recall
+
+---
+
+### Funcionalidades de aprendizado
+
+O sistema implementa funcionalidades voltadas ao aprendizado:
+
+* geração de exercícios;
+* recomendação de revisão;
+* active recall com avaliação das respostas do usuário.
+
+---
+
+## Dataset
+
+O dataset foi construído utilizando documentos acadêmicos em formato texto, com base nos slides e do ChatGPT.
+
+Temas utilizados:
+
+* Inteligência Artificial
+* Redes Neurais
+* Deep Learning
+* Processamento de Linguagem Natural
+* Embeddings
+* Clustering
+* Overfitting e Underfitting
+* Regressão Linear
+* Árvores de Decisão
+* K-Nearest Neighbors (KNN)
+
+### Origem dos dados
+
+Documentos produzidos com base em materiais acadêmicos estudados durante a disciplina e apoio do ChatGPT.
+
+### Tipo de conteúdo
+
+Arquivos textuais contendo conceitos, definições, aplicações, vantagens, limitações e exemplos.
+
+### Limitações
+
+O dataset possui caráter introdutório e as respostas ficam limitadas ao conteúdo presente nos documentos cadastrados.
+
+### Estratégia de chunking
+
+Os documentos são divididos em pequenos blocos de texto para facilitar a recuperação semântica durante as consultas.
+
+### Impacto no RAG
+
+A divisão em chunks melhora a recuperação de contexto relevante, reduzindo ruídos e aumentando a precisão das respostas.
+
+---
+
+## Avaliação do sistema
+
+O sistema possui um módulo de avaliação que registra:
+
+* pergunta realizada;
+* documentos recuperados;
+* resposta gerada;
+* classificação da resposta.
+
+---
+
+## Análise de erros
+
+Foram identificadas falhas relacionadas a:
+
+* recuperação de documentos;
+* geração de respostas;
+* ambiguidades na seleção de ferramentas.
+
+Para cada falha são registradas:
+
+* tipo;
+* causa;
+* possível solução.
 
 ---
 
 ## Tecnologias utilizadas
 
-- Python
-- Sentence Transformers
-- FAISS
-- OpenAI SDK
-- Gemma 12B
-- Google Colab
-- ChatGPT
+* Python
+* Sentence Transformers
+* FAISS
+* OpenAI SDK
+* NumPy
+* Google Colab
+* ChatGPT
+
+---
+
+## IAs utilizadas
+
+Durante o desenvolvimento foI utilizada ferramenta de Inteligência Artificial para:
+
+* revisão de código;
+* identificação de bugs;
+* sugestões de melhorias;
+* apoio na documentação.
+
+Ferramenta utilizada:
+
+* ChatGPT
 
 ---
 
@@ -63,35 +191,28 @@ O sistema permite:
 
 ```text
 data/
-├── K-Nearest Neighbors (KNN).txt
-├── Árvores de Decisão.txt
 ├── Inteligência Artificial.txt
-├── Embeddings.txt
 ├── Redes Neurais.txt
+├── Deep Learning.txt
+├── Processamento de Linguagem Natural.txt
+├── Embeddings.txt
+├── Clustering.txt
+├── Overfitting e Underfitting.txt
 ├── Regressão Linear.txt
+├── Árvores de Decisão.txt
+└── K-Nearest Neighbors (KNN).txt
+
+avaliacao/
+├── avaliacao_sistema.json
+└── analise_erros.json
+
+agenda.json
+tarefas.json
+logs.json
 
 Trabalho_IA_Jarvis.ipynb
 README.md
 ```
-
----
-
-## Funcionamento do RAG
-
-Breve explicação de como está ocorrendo o funcionamento nesta primeira entrega.
-O sistema utiliza a técnica RAG para responder perguntas sobre os materiais acadêmicos cadastrados.
-
-Fluxo utilizado:
-
-1. Os arquivos `.txt` são carregados da pasta `data`
-2. Os textos são divididos em pequenos trechos (chunks)
-3. Os chunks são convertidos em embeddings vetoriais
-4. Os embeddings são armazenados no índice vetorial FAISS
-5. A pergunta do usuário também é convertida em embedding
-6. O sistema recupera os trechos semanticamente mais próximos
-7. Os trechos recuperados são enviados para a Gemma 12B gerar a resposta final
-
-Permitindo realizar consultas semânticas utilizando os conteúdos cadastrados localmente.
 
 ---
 
@@ -100,7 +221,7 @@ Permitindo realizar consultas semânticas utilizando os conteúdos cadastrados l
 1. Instalar dependências:
 
 ```bash
-pip install sentence-transformers faiss-cpu openai
+pip install sentence-transformers faiss-cpu openai numpy
 ```
 
 2. Executar inicialmente as células responsáveis por:
@@ -116,23 +237,18 @@ data/
 ├── K-Nearest Neighbors (KNN).txt
 ├── Árvores de Decisão.txt
 ├── Inteligência Artificial.txt
-├── Embeddings.txt
-├── Redes Neurais.txt
-├── Regressão Linear.txt
 ```
+4. Inserir o token da LLM na célula de configuração da API.
 
-4. Inserir o token da API da Gemma na célula de configuração da API.
+5. Executar as células do notebook em sequência.
 
-5. Executar o restante das células em sequência.
-
----
-
-## Observações
-
-Os materiais foram convertidos para `.txt` para reduzir ruídos de leitura e melhorar a recuperação semântica dos trechos utilizados pelo sistema RAG.
+6. Utilizar o sistema por meio da função principal `jarvis()`.
 
 ---
 
-## Integrante do trabalho
+## Integrantes do trabalho
 
-- Mariana Meguro
+* Mariana Meguro
+
+```
+```
