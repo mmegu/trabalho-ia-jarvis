@@ -250,5 +250,3 @@ data/
 
 * Mariana Meguro
 
-```
-```
